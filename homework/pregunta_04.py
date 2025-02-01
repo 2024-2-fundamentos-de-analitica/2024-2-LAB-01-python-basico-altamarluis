@@ -13,9 +13,12 @@ def pregunta_04():
         lines = file.readlines()
 
     month_count = {}
-
-    for line in lines:
-        month = line.split(",")[2].split("-")[1]
-        month_count[month] = month_count.get(month, 0) + 1
+    for i in lines:
+        c = i.split(",")[0].split("-")[1]
+        if c in month_count:
+            month_count[c] += 1
+        else:
+            month_count[c] = 1
 
     return sorted(month_count.items())
+print(pregunta_04())
