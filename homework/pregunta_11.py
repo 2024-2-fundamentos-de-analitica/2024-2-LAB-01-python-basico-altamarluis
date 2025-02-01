@@ -7,12 +7,24 @@ utilizar pandas, numpy o scipy.
 
 
 def pregunta_11():
-    """
-    Retorne un diccionario que contengan la suma de la columna 2 para cada
-    letra de la columna 4, ordenadas alfabeticamente.
+    file_path = "files/input/data.csv"
 
-    Rta/
-    {'a': 122, 'b': 49, 'c': 91, 'd': 73, 'e': 86, 'f': 134, 'g': 35}
+    with open(file_path, "r") as file:
+        lines = file.readlines()
 
+    letter_sum_dict = {}
 
-    """
+    for line in lines:
+        columns = line.strip().split("\t")
+        col_4_values = columns[3].split(",")
+        col_2_value = int(columns[1])
+
+        for value in col_4_values:
+            letter = value.split(":")[0]
+
+            if letter in letter_sum_dict:
+                letter_sum_dict[letter] += col_2_value
+            else:
+                letter_sum_dict[letter] = col_2_value
+
+    return dict(sorted(letter_sum_dict.items()))
